@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Position:</b>
+  <%= @import.position %>
+</p>
+
+<p>
+  <b>Reportto:</b>
+  <%= @import.reportto %>
+</p>
+
+<p>
+  <b>Firstname:</b>
+  <%= @import.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%= @import.lastname %>
+</p>
+
+<p>
+  <b>Positiontitle:</b>
+  <%= @import.positiontitle %>
+</p>
+
+
+<%= link_to 'Edit', edit_import_path(@import) %> |
+<%= link_to 'Back', imports_path %>
