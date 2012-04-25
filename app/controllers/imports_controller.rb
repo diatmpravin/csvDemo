@@ -91,12 +91,13 @@ class ImportsController < ApplicationController
       CSV.parse(infile) do |row|
         n += 1               
         next if n == 1 or row.join.blank? # SKIP: header i.e. first row OR blank row
-        @importproduct = Import.build_from_csv(row) # build_from_csv method will map customer attributes & build new customer record         
+        @importproduct, @custError = Import.build_from_csv(row) # build_from_csv method will map customer attributes & build new customer record         
         if @importproduct.valid? # Save upon valid otherwise collect error records to export         
           @importproduct.save          
         else        	     	
         	row.push @importproduct.errors.full_messages.join(',')
-         errs << row
+        	row.push @custError if !@custError.blank?
+          errs << row
         end
       end
       
