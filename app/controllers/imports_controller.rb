@@ -1,6 +1,8 @@
 require 'csv'
 
 class ImportsController < ApplicationController
+
+	before_filter :authenticate_user!
   # GET /imports
   # GET /imports.json
   def index
