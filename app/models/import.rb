@@ -1,9 +1,9 @@
 class Import < ActiveRecord::Base
   attr_accessible :firstname, :lastname, :position, :positiontitle, :reportto
   
-  validates :reportto, :uniqueness => true
-  validates :lastname, :presence => true
-  validates :firstname, :presence => true
+  #validates :reportto, :uniqueness => true
+  #validates :lastname, :presence => true 
+  #validates :firstname, :presence => true
   
   def self.build_from_csv(row)
   	#raise row[1].inspect 
