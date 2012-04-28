@@ -1,37 +1,70 @@
+
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+<%= javascript_include_tag('jquery.tree','jquery.treeajax','jquery.treecheckbox','jquery.treecollapse','jquery.treecontextmenu','jquery.treednd','jquery.treeselect')%>
+
+<%= stylesheet_link_tag('jquery.tree','jquery-ui')%>
+
+
+<script type="text/javascript">
+     //<!--
+        $(document).ready(function() {
+            $( "#accordion" ).accordion({
+                'collapsible': true,
+                'active': -1
+            });
+            $('.jquery').each(function() {
+                eval($(this).html());
+            });
+            $('.button').button();
+        });
+      //-->
+    </script>
+</head>
+
+<body>
 <h1>Listing imports</h1>
 <%= form_tag importCsv_imports_path, :method => 'post', :multipart => true do %>
 		<p>
-			Select File:
+			Select File
 			<%= file_field_tag 'file' %>
-			<%= submit_tag 'Upload Product', :name => nil %>
+			<%= submit_tag 'Upload data', :name => nil %>
 		</p>
 <% end %>
-<table>
-  <tr>
-    <th>Position</th>
-    <th>Reportto</th>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Positiontitle</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @imports.each do |import| %>
-  <tr>
-    <td><%= import.position %></td>
-    <td><%= import.reportto %></td>
-    <td><%= import.firstname %></td>
-    <td><%= import.lastname %></td>
-    <td><%= import.positiontitle %></td>
-    <td><%= link_to 'Show', import %></td>
-    <td><%= link_to 'Edit', edit_import_path(import) %></td>
-    <td><%= link_to 'Destroy', import, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div id="accordion">
+<div id="example-3">
+            <script class="jquery" lang="text/javascript">
+                $('#example-3 div').tree({
+                    components: ['checkbox','collapse','ajax','dnd'],
+                    onCheck: {
+                        node: 'expand'
+                    },
+                    onUncheck: {
+                        node: 'collapse'
+                    }
+                });
+            </script>
 
-<br />
-
-<%= link_to 'New Import', new_import_path %>
+		
+			<div>
+                <ul>
+				<% @imports.each do |import| %>
+                    <li class="collapsed"><input type="checkbox"><span><b>Name: <%= import.firstname %>&nbsp;<%= import.lastname %></b></span>
+                    <ul>
+                    	<li class="collapsed"><input type="checkbox"><span><b>Position:</b> <%= import.position %></span>
+                        <ul>
+                            <li class="collapsed"><input type="checkbox"><span><b>ReportTo:</b> <%= import.reportto %></span>
+							<li class="collapsed"><input type="checkbox"><span><b>JobTitle:</b> <%= import.positiontitle %></span>
+                        </ul>
+                    </ul>
+				<% end %>
+                </ul>
+            </div>
+		
+</div>
+</div>
+</body>
+</html>

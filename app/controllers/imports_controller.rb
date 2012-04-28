@@ -1,5 +1,6 @@
 require 'csv'
 
+
 class ImportsController < ApplicationController
 
 	before_filter :authenticate_user!
@@ -13,7 +14,7 @@ class ImportsController < ApplicationController
       format.json { render json: @imports }
     end
   end
-
+ 
   # GET /imports/1
   # GET /imports/1.json
   def show
