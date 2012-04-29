@@ -86,7 +86,10 @@ class ImportsController < ApplicationController
     end
   end
   
-  def importCsv  	
+  def importCsv  
+	
+
+	
   	if request.post? && params[:file].present?
   		infile = params[:file].read 		  		
       n, errs = 0, []
