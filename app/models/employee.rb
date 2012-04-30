@@ -4,7 +4,7 @@ class Employee < ActiveRecord::Base
   #validates :reportto, :uniqueness => true
   #validates :lastname, :presence => true
   #validates :firstname, :presence => true
-
+	
 
   def self.build_from_csv(row)
   	#raise row[1].inspect 
@@ -12,6 +12,7 @@ class Employee < ActiveRecord::Base
   	if row[1] == '6'
   		@error = 'Maisa Pride'  		
   	end 	
+	
   	cust = Employee.find_or_initialize_by_position(row[0])  	
     cust.attributes ={:position => row[0],
      :report_to => row[1],
