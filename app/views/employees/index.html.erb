@@ -43,23 +43,23 @@
   	  <% aFlag = 0 %> 		
 			<% @employees.each do |aEmployee| %>
 				<% aFlag +=1 %>									
-				<% if aEmployee.reportto == 0 %>
-					<li class="collapsed"><input type="checkbox"><span><b><%= aEmployee.firstname %> <%= aEmployee.lastname %>(<%= aEmployee.positiontitle %>)</b></span>							
-					<% Employee.where(:reportto => aEmployee.position).each do | eachReportor| %>
+				<% if aEmployee.report_to == 0 %>
+					<li class="collapsed"><input type="checkbox"><span><b><%= aEmployee.first_name %> <%= aEmployee.last_name %>(<%= aEmployee.position_title %>)</b></span>							
+					<% Employee.where(:report_to => aEmployee.position).each do | eachReportor| %>
 						<ul>
-							<li class="collapsed"><input type="checkbox"><span><b><%= eachReportor.firstname %> <%= eachReportor.lastname %>(<%= eachReportor.positiontitle %>)</b></span>
-						  <% Employee.where(:reportto => eachReportor.position).each do | aEachReportor| %>
+							<li class="collapsed"><input type="checkbox"><span><b><%= eachReportor.first_name %> <%= eachReportor.last_name %>(<%= eachReportor.position_title %>)</b></span>
+						  <% Employee.where(:report_to => eachReportor.position).each do | aEachReportor| %>
 								<ul>
-									<li class="collapsed"><input type="checkbox"><span><b><%= aEachReportor.firstname %> <%= aEachReportor.lastname %>(<%= aEachReportor.positiontitle %>)</b></span>
-									<% Employee.where(:reportto => aEachReportor.position).each do | aaEachReportor| %>
+									<li class="collapsed"><input type="checkbox"><span><b><%= aEachReportor.first_name %> <%= aEachReportor.last_name %>(<%= aEachReportor.position_title %>)</b></span>
+									<% Employee.where(:report_to => aEachReportor.position).each do | aaEachReportor| %>
 										<ul>
-											<li class="collapsed"><input type="checkbox"><span><b><%= aaEachReportor.firstname %> <%= aaEachReportor.lastname %>(<%= aaEachReportor.positiontitle %>)</b></span>
-											<% Employee.where(:reportto => aEachReportor.position).each do | aaaEachReportor| %>
+											<li class="collapsed"><input type="checkbox"><span><b><%= aaEachReportor.first_name %> <%= aaEachReportor.last_name %>(<%= aaEachReportor.position_title %>)</b></span>
+											<% Employee.where(:report_to => aEachReportor.position).each do | aaaEachReportor| %>
 												<ul>
-													<li class="collapsed"><input type="checkbox"><span><b><%= aaaEachReportor.firstname %> <%= aaaEachReportor.lastname %>(<%= aaaEachReportor.positiontitle %>)</b></span>
-													<% Employee.where(:reportto => aEachReportor.position).each do | aaaaEachReportor| %>
+													<li class="collapsed"><input type="checkbox"><span><b><%= aaaEachReportor.first_name %> <%= aaaEachReportor.last_name %>(<%= aaaEachReportor.position_title %>)</b></span>
+													<% Employee.where(:report_to => aEachReportor.position).each do | aaaaEachReportor| %>
 														<ul>
-															<li class="collapsed"><input type="checkbox"><span><b><%= aaaaEachReportor.firstname %> <%= aaaaEachReportor.lastname %>(<%= aaaaEachReportor.positiontitle %>)</b></span>
+															<li class="collapsed"><input type="checkbox"><span><b><%= aaaaEachReportor.first_name %> <%= aaaaEachReportor.last_name %>(<%= aaaaEachReportor.position_title %>)</b></span>
 											
 														</ul>	
 													<% end %>										
@@ -76,12 +76,12 @@
 			
   		<!--
 			<% @employees.each do |aEmployee| %>
-				<li class="collapsed"><input type="checkbox"><span><b>Name: <%= aEmployee.firstname %>&nbsp;<%= aEmployee.lastname %></b></span>
+				<li class="collapsed"><input type="checkbox"><span><b>Name: <%= aEmployee.first_name %>&nbsp;<%= aEmployee.last_name %></b></span>
 				<ul>
 					<li class="collapsed"><input type="checkbox"><span><b>Position:</b> <%= aEmployee.position %></span>
 					<ul>
-						  <li class="collapsed"><input type="checkbox"><span><b>ReportTo:</b> <%= aEmployee.reportto %></span>
-							<li class="collapsed"><input type="checkbox"><span><b>JobTitle:</b> <%= aEmployee.positiontitle %></span>
+						  <li class="collapsed"><input type="checkbox"><span><b>report_to:</b> <%= aEmployee.report_to %></span>
+							<li class="collapsed"><input type="checkbox"><span><b>JobTitle:</b> <%= aEmployee.position_title %></span>
 					</ul>
     		</ul>
    		<% end %>

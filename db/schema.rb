@@ -13,34 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20120430043130) do
 
-<<<<<<< HEAD
   create_table "employees", :force => true do |t|
-    t.string   "firstname",     :default => "Vacant"
-    t.string   "lastname",      :default => "Position"
-=======
-  create_table "EMPLOYEE", :primary_key => "ID", :force => true do |t|
-    t.string  "FIRST_NAME",     :limit => 35, :default => "Vacant"
-    t.string  "LAST_NAME",      :limit => 35, :default => "Position"
-    t.string  "POSITION_TITLE", :limit => 64
-    t.integer "POSITION",                                             :null => false
-    t.integer "REPORT_TO",                                            :null => false
-  end
-
-  create_table "EMPLOYEES", :primary_key => "ID", :force => true do |t|
-    t.string  "FIRST_NAME",     :limit => 35, :default => "Vacant"
-    t.string  "LAST_NAME",      :limit => 35, :default => "Position"
-    t.string  "POSITION_TITLE", :limit => 64
-    t.integer "POSITION",                                             :null => false
-    t.integer "REPORT_TO",                                            :null => false
-  end
-
-  create_table "imports", :force => true do |t|
->>>>>>> cf19cd8f37b27903d6fc3674f84f7c687433696c
+    t.string   "first_name",     :default => "Vacant"
+    t.string   "last_name",      :default => "Position"
     t.integer  "position"
-    t.string   "positiontitle"
-    t.integer  "reportto"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.string   "position_title"
+    t.integer  "report_to"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "users", :force => true do |t|
