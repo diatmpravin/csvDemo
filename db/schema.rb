@@ -13,6 +13,22 @@
 
 ActiveRecord::Schema.define(:version => 20120427041248) do
 
+  create_table "EMPLOYEE", :primary_key => "ID", :force => true do |t|
+    t.string  "FIRST_NAME",     :limit => 35, :default => "Vacant"
+    t.string  "LAST_NAME",      :limit => 35, :default => "Position"
+    t.string  "POSITION_TITLE", :limit => 64
+    t.integer "POSITION",                                             :null => false
+    t.integer "REPORT_TO",                                            :null => false
+  end
+
+  create_table "EMPLOYEES", :primary_key => "ID", :force => true do |t|
+    t.string  "FIRST_NAME",     :limit => 35, :default => "Vacant"
+    t.string  "LAST_NAME",      :limit => 35, :default => "Position"
+    t.string  "POSITION_TITLE", :limit => 64
+    t.integer "POSITION",                                             :null => false
+    t.integer "REPORT_TO",                                            :null => false
+  end
+
   create_table "imports", :force => true do |t|
     t.integer  "position"
     t.integer  "reportto"
