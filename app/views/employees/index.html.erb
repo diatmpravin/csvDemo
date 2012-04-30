@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<%= javascript_include_tag('jquery.tree','jquery.treecheckbox','jquery.treecollapse','jquery.treeselect')%>
+<%= stylesheet_link_tag('jquery.tree','jquery-ui')%>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $( "#accordion" ).accordion({
+          'collapsible': true,
+          'active': -1
+      });
+      $('.jquery').each(function() {
+          eval($(this).html());
+      });
+      $('.button').button();
+  });
+</script>
+</head>
+<body>
+<h1>Listing imports</h1>
+	<%= form_tag importCsv_employees_path, :method => 'post', :multipart => true do %>
+		<p>
+			Select File: 
+			<%= file_field_tag 'file' %>
+			<%= submit_tag 'Upload data', :name => nil %>
+		</p>
+	<% end %>  
+  <div id="example-3">
+	<script class="jquery" lang="text/javascript">
+      $('#example-3 div').tree({
+          components: ['checkbox', 'collapse'],
+          onCheck: {
+              node: 'expand'
+          },
+          onUncheck: {
+              node: 'collapse'
+          }
+      });
+  </script>
+  <div>
+  	<ul> 
+  	  	  
+  	  <% aFlag = 0 %> 		
+			<% @employees.each do |aEmployee| %>
+				<% aFlag +=1 %>									
+				<% if aEmployee.reportto == 0 %>
+					<li class="collapsed"><input type="checkbox"><span><b><%= aEmployee.firstname %> <%= aEmployee.lastname %>(<%= aEmployee.positiontitle %>)</b></span>							
+					<% Employee.where(:reportto => aEmployee.position).each do | eachReportor| %>
+						<ul>
+							<li class="collapsed"><input type="checkbox"><span><b><%= eachReportor.firstname %> <%= eachReportor.lastname %>(<%= eachReportor.positiontitle %>)</b></span>
+						  <% Employee.where(:reportto => eachReportor.position).each do | aEachReportor| %>
+								<ul>
+									<li class="collapsed"><input type="checkbox"><span><b><%= aEachReportor.firstname %> <%= aEachReportor.lastname %>(<%= aEachReportor.positiontitle %>)</b></span>
+									<% Employee.where(:reportto => aEachReportor.position).each do | aaEachReportor| %>
+										<ul>
+											<li class="collapsed"><input type="checkbox"><span><b><%= aaEachReportor.firstname %> <%= aaEachReportor.lastname %>(<%= aaEachReportor.positiontitle %>)</b></span>
+											<% Employee.where(:reportto => aEachReportor.position).each do | aaaEachReportor| %>
+												<ul>
+													<li class="collapsed"><input type="checkbox"><span><b><%= aaaEachReportor.firstname %> <%= aaaEachReportor.lastname %>(<%= aaaEachReportor.positiontitle %>)</b></span>
+													<% Employee.where(:reportto => aEachReportor.position).each do | aaaaEachReportor| %>
+														<ul>
+															<li class="collapsed"><input type="checkbox"><span><b><%= aaaaEachReportor.firstname %> <%= aaaaEachReportor.lastname %>(<%= aaaaEachReportor.positiontitle %>)</b></span>
+											
+														</ul>	
+													<% end %>										
+												</ul>	
+											<% end %>																						
+										</ul>	
+									<% end %>
+								</ul>	
+							<% end %>
+						</ul>
+					<% end %>							
+				<% end %>						 
+			<% end %>
+			
+  		<!--
+			<% @employees.each do |aEmployee| %>
+				<li class="collapsed"><input type="checkbox"><span><b>Name: <%= aEmployee.firstname %>&nbsp;<%= aEmployee.lastname %></b></span>
+				<ul>
+					<li class="collapsed"><input type="checkbox"><span><b>Position:</b> <%= aEmployee.position %></span>
+					<ul>
+						  <li class="collapsed"><input type="checkbox"><span><b>ReportTo:</b> <%= aEmployee.reportto %></span>
+							<li class="collapsed"><input type="checkbox"><span><b>JobTitle:</b> <%= aEmployee.positiontitle %></span>
+					</ul>
+    		</ul>
+   		<% end %>
+   		-->
+    </ul>
+  </div>
+  </div>
+</body>
+</html>
