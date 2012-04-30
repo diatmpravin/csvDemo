@@ -1,4 +1,4 @@
-class Import < ActiveRecord::Base
+class Employee < ActiveRecord::Base
   attr_accessible :firstname, :lastname, :position, :positiontitle, :reportto
   
   #validates :reportto, :uniqueness => true
@@ -12,7 +12,7 @@ class Import < ActiveRecord::Base
   	if row[1] == '6'
   		@error = 'Maisa Pride'  		
   	end 	
-  	cust = Import.find_or_initialize_by_position(row[0])  	
+  	cust = self.find_or_initialize_by_position(row[0])  	
     cust.attributes ={:position => row[0],
      :reportto => row[1],
      :firstname => row[2],
@@ -25,4 +25,17 @@ class Import < ActiveRecord::Base
   	"Position,ReportTo,First Name,Last Name,Position title".split(',')
   end
   
+  def self.report(employee)
+  	aReport = Hash.new
+  	if !employee.nil?
+			employee.each do |aEmployee|
+				if aEmployee.reportto == 0
+					Employee.where(:reportto => aEmployee.position).each do | eachReportor |						
+						aReport[aEmployee.position] << eachReportor.position  
+					end
+					raise aReport[aEmployee.position].inspect
+				end
+			end
+		end	
+  end
 end

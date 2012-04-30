@@ -1,11 +1,11 @@
 CsvDemo::Application.routes.draw do
 
+
   resources :employees do
   	collection do 
   		post "importCsv"
   	end
-  end
-
+  end	
   devise_for :users
   
   resources :users, :only => [:show, :index]
