@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
   # GET /employees.json
   def index    
     @employees = Employee.all
+    
 		#Employee.report(@employees)
     respond_to do |format|
       format.html # index.html.erb
@@ -115,5 +116,9 @@ class EmployeesController < ApplicationController
         redirect_to employees_path, :notice=>'Import successful'
       end
     end
+  end
+  
+  def get_child
+  	@childs	= Employee.where(:report_to => params[:position])  	
   end
 end

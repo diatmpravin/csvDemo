@@ -4,6 +4,7 @@ CsvDemo::Application.routes.draw do
   resources :employees do
   	collection do 
   		post "importCsv"
+  		post "get_child"
   	end
   end	
   devise_for :users
